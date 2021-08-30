@@ -1,0 +1,15 @@
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.csprojAssemblyReference.cache
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.frmMain.resources
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.Properties.Resources.resources
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.csproj.GenerateResource.cache
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.csproj.CoreCompileInputs.cache
+E:\Auto Jx2\cmtjJX2\cmtjJX2\bin\Debug\cmtjJX2.exe.config
+E:\Auto Jx2\cmtjJX2\cmtjJX2\bin\Debug\cmtjJX2.exe
+E:\Auto Jx2\cmtjJX2\cmtjJX2\bin\Debug\cmtjJX2.pdb
+E:\Auto Jx2\cmtjJX2\cmtjJX2\bin\Debug\AutoClient.dll
+E:\Auto Jx2\cmtjJX2\cmtjJX2\bin\Debug\AutoClient.pdb
+E:\Auto Jx2\cmtjJX2\cmtjJX2\bin\Debug\AutoClient.dll.config
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.csproj.CopyComplete
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.exe
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.pdb
+E:\Auto Jx2\cmtjJX2\cmtjJX2\obj\Debug\cmtjJX2.frmMoveTo.resources
