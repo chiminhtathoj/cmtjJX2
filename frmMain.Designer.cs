@@ -115,6 +115,8 @@ namespace cmtjJX2
             this.cbFuncMoveTo.Size = new System.Drawing.Size(15, 14);
             this.cbFuncMoveTo.TabIndex = 2;
             this.cbFuncMoveTo.UseVisualStyleBackColor = true;
+            this.cbFuncMoveTo.CheckedChanged += new System.EventHandler(this.cbFuncMoveTo_CheckedChanged);
+            this.cbFuncMoveTo.Click += new System.EventHandler(this.cbFuncMoveTo_Click);
             // 
             // frmMain
             // 
@@ -127,6 +129,7 @@ namespace cmtjJX2
             this.Name = "frmMain";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

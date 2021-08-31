@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -675,6 +676,12 @@ namespace cmtjJX2
                 return;
             }
         }
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Giải phóng bộ nhớ khi đóng form
+            this.Dispose();
+            GC.Collect();
+        }
         // Sự kiện chọn Handle nhân vật
         public AutoClientBS CurrentClient
         {
@@ -832,6 +839,7 @@ namespace cmtjJX2
         // click vào list view player
         private void lsvPlayer_Click(object sender, EventArgs e)
         {
+            updateInfoAccount(); //update handle cho hàm setfore không thì lỗi
             lsvPlayer.Invoke(new MethodInvoker(() =>
             {
                 WinAPI.SetForegroundWindow((IntPtr)CurrentClient.WindowHwnd); //focus vao window
@@ -862,7 +870,7 @@ namespace cmtjJX2
 
                 // Checkbox
 
-                CurrentClient.cbMoveTo = bool.Parse(WinAPI.Docfile(text, "MoveTo", "MoveTo.Check1", "false"));
+                CurrentClient.cbMoveTo = bool.Parse(WinAPI.Docfile(text, "MoveTo", "MoveTo.CheckActive", "false"));
 
 
                 // load giá trị vào Project
@@ -913,6 +921,45 @@ namespace cmtjJX2
                 frmmoveto.Show();
             }
         }
+
+
+
+        //thủ tục lưu các check box hoạt động
+
+        #region checkbox hoạt động
+
+        //checkbox move to
+        private void cbFuncMoveTo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CurrentClient != null)
+            {
+                CurrentClient.cbMoveTo = cbFuncMoveTo.Checked;
+                string entityNameUnicode = CurrentClient.CurrentPlayer.EntityNameUnicode;
+                string text = "//UserData//" + entityNameUnicode.Replace("*", ".") + ".ini";
+                WinAPI.Ghifile(text, "MoveTo", "MoveTo.CheckActive", CurrentClient.cbMoveTo.ToString());
+            }
+        }
+
+
+        #endregion
+
+        //thủ tục kiểm tra lựa chọn nhân vật
+        #region kiểm tra lựa chọn nv
+
+        private void cbFuncMoveTo_Click(object sender, EventArgs e)
+        {
+            if (CurrentClient == null && lsvPlayer.Items.Count >= 1)
+            {
+                cbFuncMoveTo.Checked = false;
+                MessageBox.Show("Bạn chưa chọn nhân vật!", "Cảnh báo!");
+            }
+            else if (CurrentClient == null && lsvPlayer.Items.Count < 1)
+            {
+                cbFuncMoveTo.Checked = false;
+                MessageBox.Show("Chưa đăng nhập nhân vật!", "Cảnh báo!");
+            }
+        }
+        #endregion
 
        
     }
