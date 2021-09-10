@@ -40,6 +40,8 @@ namespace cmtjJX2
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnFuncMoveTo = new System.Windows.Forms.Button();
             this.cbFuncMoveTo = new System.Windows.Forms.CheckBox();
+            this.cbFuncReward = new System.Windows.Forms.CheckBox();
+            this.btnFuncReward3h = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsvPlayer
@@ -118,11 +120,32 @@ namespace cmtjJX2
             this.cbFuncMoveTo.CheckedChanged += new System.EventHandler(this.cbFuncMoveTo_CheckedChanged);
             this.cbFuncMoveTo.Click += new System.EventHandler(this.cbFuncMoveTo_Click);
             // 
+            // cbFuncReward
+            // 
+            this.cbFuncReward.AutoSize = true;
+            this.cbFuncReward.Location = new System.Drawing.Point(110, 403);
+            this.cbFuncReward.Name = "cbFuncReward";
+            this.cbFuncReward.Size = new System.Drawing.Size(15, 14);
+            this.cbFuncReward.TabIndex = 4;
+            this.cbFuncReward.UseVisualStyleBackColor = true;
+            // 
+            // btnFuncReward3h
+            // 
+            this.btnFuncReward3h.Location = new System.Drawing.Point(130, 398);
+            this.btnFuncReward3h.Name = "btnFuncReward3h";
+            this.btnFuncReward3h.Size = new System.Drawing.Size(75, 23);
+            this.btnFuncReward3h.TabIndex = 3;
+            this.btnFuncReward3h.Text = "Reward";
+            this.btnFuncReward3h.UseVisualStyleBackColor = true;
+            this.btnFuncReward3h.Click += new System.EventHandler(this.btnFuncReward3h_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 687);
+            this.Controls.Add(this.cbFuncReward);
+            this.Controls.Add(this.btnFuncReward3h);
             this.Controls.Add(this.cbFuncMoveTo);
             this.Controls.Add(this.btnFuncMoveTo);
             this.Controls.Add(this.lsvPlayer);
@@ -148,6 +171,8 @@ namespace cmtjJX2
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnFuncMoveTo;
         private System.Windows.Forms.CheckBox cbFuncMoveTo;
+        private System.Windows.Forms.CheckBox cbFuncReward;
+        private System.Windows.Forms.Button btnFuncReward3h;
     }
 }
 

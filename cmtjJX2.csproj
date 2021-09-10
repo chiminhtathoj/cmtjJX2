@@ -59,6 +59,12 @@
     <Compile Include="frmMoveTo.Designer.cs">
       <DependentUpon>frmMoveTo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReward.Designer.cs">
+      <DependentUpon>frmReward.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">

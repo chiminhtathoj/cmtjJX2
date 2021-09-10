@@ -166,6 +166,7 @@ namespace cmtjJX2
 
         //auto di chuyen
         public bool cbMoveTo = false;
+        public bool CheckRun = false;
         public int toaDoX = 0;
         public int toaDoY = 0;
         public int idMap = 0;

@@ -654,6 +654,13 @@ namespace cmtjJX2
             //khi load form lên ở góc trên cùng bên phải
             base.Top = 0;
             base.Left = Screen.PrimaryScreen.WorkingArea.Width - base.Width;
+
+            //Tạo thread mới chạy hàm MoveTo
+            Thread thrdMoveTo = new Thread(new ThreadStart(moveTo));
+            thrdMoveTo.Priority = ThreadPriority.Normal;
+            thrdMoveTo.IsBackground = true;
+            thrdMoveTo.Start();
+
         }
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -763,7 +770,7 @@ namespace cmtjJX2
 
                     row.SubItems.Add(client.CurrentPlayer.EntityNameUnicode);
                     row.SubItems.Add(client.CurrentPlayer.HP.ToString());
-                    row.SubItems.Add(client.CurrentPlayer.EntityMapID.ToString());
+                    row.SubItems.Add(client.CurrentPlayer.EntityMapString);
                     row.SubItems.Add(client.CurrentPlayer.isOnline);
 
                     lsvPlayer.Items.Add(row);
@@ -781,7 +788,7 @@ namespace cmtjJX2
 
                         row.SubItems[1].Text = client.CurrentPlayer.EntityNameUnicode;
                         row.SubItems[2].Text = client.CurrentPlayer.HP.ToString();
-                        row.SubItems[3].Text = client.CurrentPlayer.EntityMapID.ToString();
+                        row.SubItems[3].Text = client.CurrentPlayer.EntityMapString;
                         row.SubItems[4].Text = client.CurrentPlayer.isOnline;
                     }
                     else
@@ -820,13 +827,15 @@ namespace cmtjJX2
 
         //các thủ tục làm trước khi đóng form
 
-      
+
 
 
         // Click vào check box chọn acout trên listviews
 
         private void lsvPlayer_ItemCheck(object sender, ItemCheckEventArgs e)
+
         {
+
             lsvPlayer.Invoke(new MethodInvoker(() =>
             {
 
@@ -839,11 +848,13 @@ namespace cmtjJX2
         // click vào list view player
         private void lsvPlayer_Click(object sender, EventArgs e)
         {
-            updateInfoAccount(); //update handle cho hàm setfore không thì lỗi
             lsvPlayer.Invoke(new MethodInvoker(() =>
             {
-                WinAPI.SetForegroundWindow((IntPtr)CurrentClient.WindowHwnd); //focus vao window
-                WinAPI.ShowWindow(CurrentClient.WindowHwnd.ToInt32(), 1);//param2 1 = show  //chi show khi an,k tu focus vao window
+              if(CurrentClient != null)
+                {
+                    WinAPI.SetForegroundWindow((IntPtr)CurrentClient.WindowHwnd); //focus vao window
+                    WinAPI.ShowWindow(CurrentClient.WindowHwnd.ToInt32(), 1);//param2 1 = show  //chi show khi an,k tu focus vao window
+                }
             }));
         }
 
@@ -907,7 +918,7 @@ namespace cmtjJX2
                 frmmoveto.Refresh();
                 frmmoveto.CurrentClient = CurrentClient;
                 frmmoveto.StartPosition = FormStartPosition.Manual;
-                frmmoveto.Left = Convert.ToInt32(Left - (base.Width +100));
+                frmmoveto.Left = Convert.ToInt32(Left - (base.Width + 100));
                 frmmoveto.Top = Convert.ToInt32(this.Top);
                 frmmoveto.Show();
             }
@@ -940,7 +951,6 @@ namespace cmtjJX2
             }
         }
 
-
         #endregion
 
         //thủ tục kiểm tra lựa chọn nhân vật
@@ -961,7 +971,51 @@ namespace cmtjJX2
         }
         #endregion
 
-       
-    }
+        #region các hàm xử lý các chức năng chính auto
+        private void moveTo()
+        {
+            while (true)
+            {
+                   
+                Thread.Sleep(500);
+                try
+                {
+                    if (_clients.Count < 1)
+                        return;
 
+                    var _clientsMoveTo = new Dictionary<IntPtr, AutoClientBS>(_clients);
+
+                    foreach (var autoClient in _clientsMoveTo.Values)
+                    {
+                        if (autoClient.cbMoveTo == true && autoClient.ischecked == true && autoClient.CheckRun == true)
+                        {
+                            if (!autoClient.cbMoveTo || !autoClient.ischecked)
+                                return;
+
+                            if (!autoClient.isInjected)
+                                autoClient.Inject();
+                            if (autoClient.toaDoX != 0 && autoClient.toaDoY != 0 && autoClient.idMap != 0)
+                            {
+                                autoClient.MoveTo(autoClient.toaDoX, autoClient.toaDoY, autoClient.idMap);
+                            }
+                            //Thread.Sleep(1000);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Auto moveto: " + ex.Message);
+                    return;
+                }
+
+            }
+            #endregion
+
+        }
+
+        private void btnFuncReward3h_Click(object sender, EventArgs e)
+        {
+            CurrentClient.shortMove(200, 175, 180);
+        }
+    }
 }

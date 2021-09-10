@@ -29,6 +29,7 @@ namespace cmtjJX2
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtX = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,6 +37,8 @@ namespace cmtjJX2
             this.label3 = new System.Windows.Forms.Label();
             this.txtMap = new System.Windows.Forms.TextBox();
             this.btnMove = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tmrMoveTo = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // txtX
@@ -96,11 +99,29 @@ namespace cmtjJX2
             this.btnMove.UseVisualStyleBackColor = true;
             this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(110, 58);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // tmrMoveTo
+            // 
+            this.tmrMoveTo.Enabled = true;
+            this.tmrMoveTo.Interval = 500;
+            this.tmrMoveTo.Tick += new System.EventHandler(this.tmrMoveTo_Tick);
+            // 
             // frmMoveTo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(286, 153);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btnMove);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMap);
@@ -126,5 +147,7 @@ namespace cmtjJX2
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.Button btnMove;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Timer tmrMoveTo;
     }
 }

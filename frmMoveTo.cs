@@ -31,24 +31,53 @@ namespace cmtjJX2
             }
         }
 
+
         private void btnMove_Click(object sender, EventArgs e)
         {
             if (CurrentClient != null)
             {
-                CurrentClient.toaDoX = Convert.ToInt32(txtX.Text);
-                CurrentClient.toaDoY = Convert.ToInt32(txtY.Text);
-                CurrentClient.idMap = Convert.ToInt32(txtMap.Text);
-                string entityNameUnicode = CurrentClient.CurrentPlayer.EntityNameUnicode;
-                string text = "//UserData//" + entityNameUnicode.Replace("*", ".") + ".ini";
-                WinAPI.Ghifile(text, "MoveTo", "ValueX", CurrentClient.toaDoX.ToString());
-                WinAPI.Ghifile(text, "MoveTo", "ValueY", CurrentClient.toaDoY.ToString());
-                WinAPI.Ghifile(text, "MoveTo", "ValueMap", CurrentClient.idMap.ToString());
+            
+                CurrentClient.MoveTo(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text), Convert.ToInt32(txtMap.Text));
             }
         }
 
         private void frmMoveTo_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void tmrMoveTo_Tick(object sender, EventArgs e)
+        {
+            if (CurrentClient != null)
+            {
+                if (checkBox1.Checked)
+                {
+                    CurrentClient.toaDoX = Convert.ToInt32(txtX.Text);
+                    CurrentClient.toaDoY = Convert.ToInt32(txtY.Text);
+                    CurrentClient.idMap = Convert.ToInt32(txtMap.Text);
+                    string entityNameUnicode = CurrentClient.CurrentPlayer.EntityNameUnicode;
+                    string text = "//UserData//" + entityNameUnicode.Replace("*", ".") + ".ini";
+                    WinAPI.Ghifile(text, "MoveTo", "ValueX", CurrentClient.toaDoX.ToString());
+                    WinAPI.Ghifile(text, "MoveTo", "ValueY", CurrentClient.toaDoY.ToString());
+                    WinAPI.Ghifile(text, "MoveTo", "ValueMap", CurrentClient.idMap.ToString());
+                    WinAPI.Ghifile(text, "MoveTo", "CheckRun", "true");
+                    CurrentClient.CheckRun = true;
+                }
+                else
+                {
+                    string entityNameUnicode = CurrentClient.CurrentPlayer.EntityNameUnicode;
+                    string text = "//UserData//" + entityNameUnicode.Replace("*", ".") + ".ini";
+                    WinAPI.Ghifile(text, "MoveTo", "CheckRun", "false");
+                    CurrentClient.CheckRun = true;
+
+                }
+
+            }
         }
     }
 }
